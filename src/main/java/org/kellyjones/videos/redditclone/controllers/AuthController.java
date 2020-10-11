@@ -3,10 +3,9 @@ package org.kellyjones.videos.redditclone.controllers;
 import lombok.AllArgsConstructor;
 import org.kellyjones.videos.redditclone.dto.RegisterRequest;
 import org.kellyjones.videos.redditclone.services.AuthService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -16,7 +15,20 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public void signup(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
+        if (authService.signup(registerRequest)) {
+            return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User Registration Failed", HttpStatus.BAD_REQUEST);
+        }
+    }
 
+    @GetMapping("accountVerification/{token}") // FIXME Not sure I love this being a GET operation.
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+        if (authService.verifyAccount(token)) {
+            return new ResponseEntity<>("Account Activated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Unable to Activate Account", HttpStatus.BAD_REQUEST);
+        }
     }
 }
