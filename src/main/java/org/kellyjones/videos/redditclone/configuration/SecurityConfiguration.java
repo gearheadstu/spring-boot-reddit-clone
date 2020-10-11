@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 // Allow any request against typical Swagger endpoints
                 .antMatchers(
-                        "/swagger-ui.html",
+                        "/swagger-ui/**",
                         "/swagger-resources/**",
                         "/v2/api-docs",
                         "/configuration/ui",
