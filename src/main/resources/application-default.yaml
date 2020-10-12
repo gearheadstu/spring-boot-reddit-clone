@@ -6,3 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/spring_reddit_clone?serverTimezone=UTC
     username: reddit
     password: reddit
+
+keystore:
+  path: /reddit.jks
+  secret: r3ddit
+  jwt:
+    key: reddit

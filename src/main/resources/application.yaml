@@ -24,3 +24,7 @@ eureka:
     enabled: false
     serviceUrl:
       registerWithEureka: false
+
+jwt:
+  expiration:
+    time: 90000

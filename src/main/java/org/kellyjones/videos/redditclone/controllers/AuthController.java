@@ -1,6 +1,8 @@
 package org.kellyjones.videos.redditclone.controllers;
 
 import lombok.AllArgsConstructor;
+import org.kellyjones.videos.redditclone.dto.AuthenticationResponse;
+import org.kellyjones.videos.redditclone.dto.LoginRequest;
 import org.kellyjones.videos.redditclone.dto.RegisterRequest;
 import org.kellyjones.videos.redditclone.services.AuthService;
 import org.springframework.http.HttpStatus;
@@ -30,5 +32,11 @@ public class AuthController {
         } else {
             return new ResponseEntity<>("Unable to Activate Account", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
+
     }
 }
