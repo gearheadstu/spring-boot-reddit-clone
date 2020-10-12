@@ -33,9 +33,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/**")
                     .permitAll()
 
-                // Allow any request against an auth-related api endpoint
-                .antMatchers("/api/auth/**") // FIXME: constant here
+                // Allow any request against API endpoints
+                .antMatchers(
+                        "/api/auth/**",
+                        "/api/subreddit",
+                        "/api/posts/",
+                        "/api/posts/**")
                     .permitAll()
+
+
 
                 // Allow any request against typical Swagger endpoints
                 .antMatchers(
