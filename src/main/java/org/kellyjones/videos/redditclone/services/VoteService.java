@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-import static org.kellyjones.videos.redditclone.model.VoteType.UP;
-
 @Service
 @Slf4j
 @AllArgsConstructor
