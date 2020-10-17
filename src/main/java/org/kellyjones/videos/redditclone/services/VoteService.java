@@ -7,6 +7,7 @@ import org.kellyjones.videos.redditclone.exceptions.PostNotFoundException;
 import org.kellyjones.videos.redditclone.exceptions.RedditException;
 import org.kellyjones.videos.redditclone.model.Post;
 import org.kellyjones.videos.redditclone.model.Vote;
+import org.kellyjones.videos.redditclone.model.VoteType;
 import org.kellyjones.videos.redditclone.repository.PostRepository;
 import org.kellyjones.videos.redditclone.repository.VoteRepository;
 import org.springframework.stereotype.Service;
@@ -36,11 +37,10 @@ public class VoteService {
             throw new RedditException("You have already "
                     + voteDto.getVoteType() + "'d for this post");
         }
-        if (UP.equals(voteDto.getVoteType())) {
-            post.setVoteCount(post.getVoteCount() + 1);
-        } else {
-            post.setVoteCount(post.getVoteCount() - 1);
-        }
+
+        VoteType voteType = voteDto.getVoteType();
+        post.setVoteCount(post.getVoteCount() + voteType.getDirection());
+
         voteRepository.save(mapToVote(voteDto, post));
         postRepository.save(post);
     }
