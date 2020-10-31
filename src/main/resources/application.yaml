@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: springboot_reddit
+
+  cloud:
+    service-registry:
+      auto-registration:
+        enabled: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialize: true
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      registerWithEureka: false
+
+jwt:
+  expiration:
+    time: 90000
